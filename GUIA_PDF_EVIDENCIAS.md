@@ -17,7 +17,7 @@
 | Recurso | Enlace de Acceso | Observaciones |
 | :--- | :--- | :--- |
 | **Repositorio GitHub** | [https://github.com/Sarincon508/Parcial-moviles-2.git](https://github.com/Sarincon508/Parcial-moviles-2.git) | Repositorio público con backend, frontend y documentación |
-| **Video Explicativo** | *[PEGA AQUÍ TU ENLACE DE YOUTUBE U OCULTO / DRIVE]* | Video con audio explicativo y demostración completa |
+| **Video Explicativo** | [https://drive.google.com/file/d/1yq60CG5vL9WI28YQp-Yma2jgZIlbMx17/view?usp=sharing](https://drive.google.com/file/d/1yq60CG5vL9WI28YQp-Yma2jgZIlbMx17/view?usp=sharing) | Video con audio explicativo y demostración completa |
 | **API Desplegada (Bono 5%)** | [https://inventario-api-parcial2.onrender.com](https://inventario-api-parcial2.onrender.com) | API REST en producción activa con SQLite persistente |
 
 > ⚠️ **Nota:** Asegúrate de que el enlace de tu video en YouTube esté en modo **"Oculto" (Unlisted)** o en Google Drive con acceso para **"Cualquier persona que tenga el enlace"** para que el docente pueda calificarlo sin requerir permisos.
