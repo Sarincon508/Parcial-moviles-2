@@ -360,9 +360,22 @@ Puedes importarlo directamente en **Postman** o en la extensión **Thunder Clien
 
 ## ☁️ Despliegue en la Nube (Opcional 5%)
 
-Si se opta por el despliegue en la nube:
-- **URL Pública:** `https://tu-api.onrender.com` (Sustituir por la URL generada en Render).
-- **Consumo desde Flutter:** Modificar `frontend/assets/.env` con la URL remota o utilizar el diálogo de configuración integrado dentro de la app móvil.
+El backend está 100% preparado y configurado con `render.yaml` para despliegue automático en la nube gratuita de **Render.com**.
+
+### Despliegue en 1 Clic con Render:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Sarincon508/Parcial-moviles-2)
+
+1. Haz clic en el botón **"Deploy to Render"** de arriba (o inicia sesión con tu GitHub en [render.com](https://render.com)).
+2. Render detectará automáticamente el archivo `render.yaml` configurado en el repositorio:
+   - Directorio raíz: `backend`
+   - Comando de compilación: `npm install`
+   - Comando de inicio: `npm start`
+   - Variables de entorno preconfiguradas.
+3. Presiona **"Apply"** o **"Create Web Service"**.
+4. En 1 minuto obtendrás tu URL pública con HTTPS gratis, por ejemplo:
+   `https://inventario-api-parcial2.onrender.com`
+5. Conecta tu app móvil Flutter ingresando dicha URL en la app o en `frontend/assets/.env`.
 
 ---
 

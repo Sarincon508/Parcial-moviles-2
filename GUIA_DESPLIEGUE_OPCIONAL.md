@@ -10,18 +10,19 @@
 
 ---
 
-## 🚀 Opción Recomendada: Despliegue Gratuito en Render.com
+## 🚀 Opción Recomendada: Despliegue en 1 Clic con Render.com (Gratis)
 
-Render es la plataforma más sencilla y rápida para desplegar APIs de Node.js de forma 100% gratuita con soporte HTTPS automático.
+Render es la plataforma más recomendada y sencilla para alojar APIs de Node.js con base de datos SQLite y certificados HTTPS automáticos sin costo.
 
-### Paso 1: Subir tus cambios a GitHub
-Asegúrate de que tu repositorio en GitHub tenga subida la carpeta `backend/`.
+El proyecto ya cuenta con el archivo de configuración **`render.yaml`** en la raíz del repositorio, por lo que **Render autodetectará toda la configuración técnica sin que tengas que escribir comandos**.
 
-### Paso 2: Crear una cuenta en Render
-1. Ingresa a [https://render.com](https://render.com).
-2. Regístrate o inicia sesión con tu cuenta de GitHub.
+### Botón de Despliegue Directo:
+Haz clic en el siguiente enlace o botón desde el README:
+👉 **[https://render.com/deploy?repo=https://github.com/Sarincon508/Parcial-moviles-2](https://render.com/deploy?repo=https://github.com/Sarincon508/Parcial-moviles-2)**
 
-### Paso 3: Crear un Nuevo Web Service
+---
+
+### Paso a Paso Manual (si prefieres crearlo desde el panel):
 1. En el Dashboard de Render, presiona el botón **"New +"** en la esquina superior derecha y selecciona **"Web Service"**.
 2. Selecciona la opción **"Build and deploy from a Git repository"** y presiona **Next**.
 3. Conecta tu repositorio de GitHub: `Sarincon508/Parcial-moviles-2`.
