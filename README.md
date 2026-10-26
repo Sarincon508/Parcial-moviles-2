@@ -367,6 +367,6 @@ Si se opta por el despliegue en la nube:
 ---
 
 ## 👤 Autor
-- **Estudiante:** [Tu Nombre]
+- **Estudiante:** Samuel Alejandro Rincon Serna
 - **Repositorio:** [https://github.com/Sarincon508/Parcial-moviles-2.git](https://github.com/Sarincon508/Parcial-moviles-2.git)
 - **Licencia:** MIT
