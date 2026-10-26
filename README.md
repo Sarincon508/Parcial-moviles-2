@@ -7,19 +7,19 @@ Solución informática completa para la gestión y control de inventario de prod
 ## 📑 Tabla de Contenidos
 
 1. [Descripción General](#-descripción-general)
-2. [Arquitectura del Proyecto](#-arquitectura-del-proyecto)
-3. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
-4. [Estructura del Repositorio](#-estructura-del-repositorio)
-5. [Instalación y Puesta en Marcha](#-instalación-y-puesta-en-marcha)
+2. [Despliegue en la Nube (Opcional 5%)](#-despliegue-en-la-nube-opcional-5--activo-y-en-producción-)
+3. [Arquitectura del Proyecto](#-arquitectura-del-proyecto)
+4. [Tecnologías Utilizadas](#-tecnologías-utilizadas)
+5. [Estructura del Repositorio](#-estructura-del-repositorio)
+6. [Instalación y Puesta en Marcha](#-instalación-y-puesta-en-marcha)
    - [Backend (API REST)](#1-ejecución-del-backend-nodejs)
    - [Frontend (Flutter)](#2-ejecución-del-frontend-flutter)
-6. [Descripción de la Base de Datos](#-descripción-de-la-base-de-datos)
-7. [Endpoints de la API REST](#-endpoints-de-la-api-rest)
-8. [Ejemplos de Peticiones y Respuestas JSON](#-ejemplos-de-peticiones-y-respuestas-json)
-9. [Funcionalidades de la Aplicación Móvil](#-funcionalidades-de-la-aplicación-móvil)
-10. [Colección para Pruebas (Postman / Thunder Client)](#-colección-para-pruebas)
-11. [Guías y Entregables](#-guías-y-entregables)
-12. [Despliegue en la Nube (Opcional 5%)](#-despliegue-en-la-nube-opcional-5)
+7. [Descripción de la Base de Datos](#-descripción-de-la-base-de-datos)
+8. [Endpoints de la API REST](#-endpoints-de-la-api-rest)
+9. [Ejemplos de Peticiones y Respuestas JSON](#-ejemplos-de-peticiones-y-respuestas-json)
+10. [Funcionalidades de la Aplicación Móvil](#-funcionalidades-de-la-aplicación-móvil)
+11. [Colección para Pruebas (Postman / Thunder Client)](#-colección-para-pruebas)
+12. [Guías y Entregables](#-guías-y-entregables)
 
 ---
 
@@ -31,6 +31,18 @@ La aplicación móvil cuenta con un **Dashboard analítico** que calcula en tiem
 - Total de productos registrados.
 - Total de existencias físicas disponibles.
 - Valor económico total del inventario ($\sum \text{precio} \times \text{cantidad}$).
+
+---
+
+## ☁️ Despliegue en la Nube (Opcional 5%) — ¡Activo y en Producción! 🟢
+
+El backend se encuentra desplegado y accesible públicamente con HTTPS en **Render**:
+
+- **URL Pública del Backend:** [https://inventario-api-parcial2.onrender.com](https://inventario-api-parcial2.onrender.com)
+- **Endpoint de Productos:** [https://inventario-api-parcial2.onrender.com/api/productos](https://inventario-api-parcial2.onrender.com/api/productos)
+- **Endpoint de Estadísticas:** [https://inventario-api-parcial2.onrender.com/api/productos/stats](https://inventario-api-parcial2.onrender.com/api/productos/stats)
+
+La aplicación Flutter en `frontend/assets/.env` está configurada por defecto para consumir directamente este servidor en la nube.
 
 ---
 
@@ -152,6 +164,7 @@ El proyecto aplica una estricta **separación de responsabilidades**:
 ├── GUIA_VIDEO_Y_EXPOSICION.md       # Guion paso a paso y minutero para grabar el video
 ├── GUIA_PDF_EVIDENCIAS.md           # Estructura y plantilla para el informe PDF
 ├── GUIA_DESPLIEGUE_OPCIONAL.md      # Instrucciones para desplegar en Render/Railway (5%)
+├── render.yaml                      # Configuración de infraestructura en Render
 └── README.md                        # Documentación principal
 ```
 
@@ -195,11 +208,6 @@ flutter run -d android
 # Para Google Chrome (Web):
 flutter run -d chrome
 ```
-
-> 💡 **Nota sobre la URL de la API:**
-> - En **Windows Desktop** y **Web**, la app se conecta a `http://localhost:3000/api`.
-> - En el **Emulador Android**, la app detecta automáticamente el emulador y redirige a `http://10.0.2.2:3000/api`.
-> - Además, la aplicación incluye una ventana de configuración (ícono de engranaje ⚙️ en el Dashboard) para cambiar la URL en caliente sin tener que recompilar el código.
 
 ---
 
@@ -275,70 +283,6 @@ La base de datos relacional utiliza **SQLite** y cuenta con la siguiente tabla:
 }
 ```
 
-### 3. Registrar Producto (`POST /api/productos`)
-**Cuerpo de la Petición:**
-```json
-{
-  "nombre": "Silla Ergonómica Pro",
-  "codigo": "PROD-100",
-  "descripcion": "Soporte lumbar ajustable y apoyabrazos 3D",
-  "precio": 179.99,
-  "cantidad": 8,
-  "categoria": "Mobiliario"
-}
-```
-**Respuesta (`201 Created`):**
-```json
-{
-  "success": true,
-  "message": "Producto registrado exitosamente.",
-  "data": {
-    "id": 13,
-    "nombre": "Silla Ergonómica Pro",
-    "codigo": "PROD-100",
-    "descripcion": "Soporte lumbar ajustable y apoyabrazos 3D",
-    "precio": 179.99,
-    "cantidad": 8,
-    "categoria": "Mobiliario",
-    "created_at": "2026-10-26 16:10:00",
-    "updated_at": "2026-10-26 16:10:00"
-  }
-}
-```
-
-### 4. Error de Validación (`POST /api/productos` con código duplicado o precio inválido)
-**Respuesta (`422 Unprocessable Entity`):**
-```json
-{
-  "success": false,
-  "message": "El código \"PROD-100\" ya está registrado en otro producto.",
-  "errors": [
-    {
-      "field": "codigo",
-      "message": "El código del producto ya existe en el inventario."
-    }
-  ]
-}
-```
-
----
-
-## 📱 Funcionalidades de la Aplicación Móvil
-
-1. **Dashboard Principal:**
-   - 3 tarjetas con diseño moderno en degradé con las métricas calculadas en tiempo real.
-   - Acceso rápido a las opciones del menú y recarga manual.
-2. **Gestión de Productos (CRUD Completo):**
-   - **Listado:** visualización con tarjetas, indicador de disponibilidad según el nivel de stock (verde, naranja, rojo).
-   - **Búsqueda & Filtro:** barra de búsqueda dinámica y chips horizontales por categorías.
-   - **Detalle:** vista completa con cálculo automático del valor total acumulado del stock.
-   - **Registro:** formulario con validación interactiva de campos y formateadores numéricos.
-   - **Edición:** precarga de datos existentes y envío mediante método PUT.
-   - **Eliminación:** confirmación obligatoria mediante cuadro de diálogo modal antes de ejecutar la petición DELETE.
-3. **Manejo de Estados de UI:**
-   - Vistas dedicadas para estado de **Carga** (`CircularProgressIndicator`), **Error** con botón de reintento y **Vacío** con llamado a la acción.
-   - Mensajes emergentes (`SnackBar`) flotantes con código de color (verde para éxito, rojo para error).
-
 ---
 
 ## 🧪 Colección para Pruebas
@@ -354,28 +298,7 @@ Puedes importarlo directamente en **Postman** o en la extensión **Thunder Clien
 
 - [Guion y Metodología para la Grabación del Video](file:///F:/Users/Max/Desktop/moviles/parcial%202/GUIA_VIDEO_Y_EXPOSICION.md): Minutero y texto sugerido para la exposición en video.
 - [Plantilla del Documento PDF de Evidencias](file:///F:/Users/Max/Desktop/moviles/parcial%202/GUIA_PDF_EVIDENCIAS.md): Estructura para armar el documento de entrega con capturas.
-- [Guía de Despliegue en la Nube](file:///F:/Users/Max/Desktop/moviles/parcial%202/GUIA_DESPLIEGUE_OPCIONAL.md): Instrucciones para desplegar gratis en Render o Railway (Bono del 5%).
-
----
-
-## ☁️ Despliegue en la Nube (Opcional 5%)
-
-El backend está 100% preparado y configurado con `render.yaml` para despliegue automático en la nube gratuita de **Render.com**.
-
-### Despliegue en 1 Clic con Render:
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Sarincon508/Parcial-moviles-2)
-
-1. Haz clic en el botón **"Deploy to Render"** de arriba (o inicia sesión con tu GitHub en [render.com](https://render.com)).
-2. Render detectará automáticamente el archivo `render.yaml` configurado en el repositorio:
-   - Directorio raíz: `backend`
-   - Comando de compilación: `npm install`
-   - Comando de inicio: `npm start`
-   - Variables de entorno preconfiguradas.
-3. Presiona **"Apply"** o **"Create Web Service"**.
-4. En 1 minuto obtendrás tu URL pública con HTTPS gratis, por ejemplo:
-   `https://inventario-api-parcial2.onrender.com`
-5. Conecta tu app móvil Flutter ingresando dicha URL en la app o en `frontend/assets/.env`.
+- [Guía de Despliegue en la Nube](file:///F:/Users/Max/Desktop/moviles/parcial%202/GUIA_DESPLIEGUE_OPCIONAL.md): Instrucciones de Render (Bono del 5%).
 
 ---
 

@@ -1,17 +1,10 @@
-# Plantilla y Contenido para el Documento PDF de Evidencias
-
-Este documento sirve como guía y contenido estructurado para armar el **PDF de Evidencias** exigido en el punto **8.3** de la entrega. Puedes copiar este contenido directamente a Microsoft Word, Google Docs o Canva y guardarlo como archivo `.pdf`.
-
----
-
 # INFORME DE EVIDENCIAS — SEGUNDO PARCIAL PROGRAMACIÓN MÓVIL
 ## Sistema de Gestión de Inventario con API REST y Flutter
 
 ---
 
 ## 1. Identificación del Estudiante
-- **Nombre Completo:** [Tu Nombre Completo Aquí]
-- **Código Estudiantil:** [Tu Código / ID Aquí]
+- **Nombre Completo:** Samuel Alejandro Rincon Serna
 - **Asignatura:** Programación Móvil
 - **Semestre:** 2026-II
 - **Docente:** [Nombre del Docente]
@@ -25,9 +18,9 @@ Este documento sirve como guía y contenido estructurado para armar el **PDF de 
 | :--- | :--- | :--- |
 | **Repositorio GitHub** | [https://github.com/Sarincon508/Parcial-moviles-2.git](https://github.com/Sarincon508/Parcial-moviles-2.git) | Repositorio público con backend, frontend y documentación |
 | **Video Explicativo** | *[PEGA AQUÍ TU ENLACE DE YOUTUBE U OCULTO / DRIVE]* | Video con audio explicativo y demostración completa |
-| **API Desplegada (Opcional 5%)** | *[PEGA AQUÍ TU URL HTTPS DE RENDER O RAILWAY]* | API REST en producción con SQLite persistente |
+| **API Desplegada (Bono 5%)** | [https://inventario-api-parcial2.onrender.com](https://inventario-api-parcial2.onrender.com) | API REST en producción activa con SQLite persistente |
 
-> ⚠️ **Nota Importante:** Verifique que el enlace del video en YouTube esté en modo **"Oculto" (Unlisted)** o en Google Drive con acceso para **"Cualquier persona que tenga el enlace"**, para que el evaluador pueda reproducirlo sin solicitar permisos.
+> ⚠️ **Nota:** Asegúrate de que el enlace de tu video en YouTube esté en modo **"Oculto" (Unlisted)** o en Google Drive con acceso para **"Cualquier persona que tenga el enlace"** para que el docente pueda calificarlo sin requerir permisos.
 
 ---
 
@@ -35,10 +28,11 @@ Este documento sirve como guía y contenido estructurado para armar el **PDF de 
 
 ### 3.1. Backend (API REST)
 - **Node.js & Express.js:** Entorno de ejecución y framework minimalista para construcción de APIs RESTful asíncronas de alto rendimiento.
-- **SQLite3:** Base de datos relacional ligera embebida con persistencia física en disco (`database.sqlite`).
+- **SQLite3:** Base de datos relacional ligera con persistencia física en disco (`database.sqlite`).
 - **CORS:** Middleware que habilita la interoperabilidad y consumo cruzado entre el backend y clientes Web, Android, iOS y Desktop.
 - **Validaciones & Middlewares:** Control de integridad de datos (código único, campos obligatorios, cantidades y precios válidos con código HTTP 422).
 - **Dotenv:** Administración segura de variables de entorno del servidor.
+- **Render Cloud:** Despliegue de infraestructura automatizado con HTTPS público.
 
 ### 3.2. Frontend Móvil (Flutter)
 - **Flutter Framework & Dart SDK:** Desarrollo de interfaz multiplataforma moderna con Material 3.
@@ -68,67 +62,62 @@ CREATE TABLE IF NOT EXISTS productos (
 ```
 
 ### 4.2. Capturas de Pruebas en Postman / Thunder Client
-*(Inserta aquí las capturas de pantalla de tus pruebas)*
 
 1. **GET `/api/productos` (Listado general):**
-   - *Captura demostrando código de respuesta `200 OK` y el array JSON de productos con los datos iniciales sembrados.*
+   - *Pegar captura demostrando código de respuesta `200 OK` y el array JSON de productos con los 12 datos iniciales.*
 2. **GET `/api/productos/stats` (Métricas del Dashboard):**
-   - *Captura mostrando `totalProductos`, `totalUnidades` y `valorTotalInventario`.*
+   - *Pegar captura mostrando `totalProductos: 12`, `totalUnidades: 295` y `valorTotalInventario`.*
 3. **GET `/api/productos/:id` (Consulta por ID):**
-   - *Captura mostrando el detalle del producto #1 y otra mostrando respuesta `404 Not Found` ante un ID inexistente.*
+   - *Pegar captura mostrando el detalle del producto #1 y otra con respuesta `404 Not Found` ante un ID inexistente.*
 4. **POST `/api/productos` (Registro de nuevo producto):**
-   - *Captura mostrando respuesta `201 Created` con el ID autogenerado.*
-   - *Captura mostrando error `422 Unprocessable Entity` al intentar ingresar un código duplicado o precio negativo.*
+   - *Pegar captura mostrando respuesta `201 Created` con el ID autogenerado.*
+   - *Pegar captura demostrando validación `422 Unprocessable Entity` al enviar código duplicado o precio negativo.*
 5. **PUT `/api/productos/:id` (Actualización de producto):**
-   - *Captura demostrando la modificación de precio y cantidad con código `200 OK`.*
+   - *Pegar captura modificando precio y cantidad con respuesta `200 OK`.*
 6. **DELETE `/api/productos/:id` (Eliminación de producto):**
-   - *Captura demostrando la eliminación exitosa con respuesta `200 OK`.*
+   - *Pegar captura eliminando un producto con código `200 OK`.*
 
 ---
 
 ## 5. Evidencias de la Aplicación Móvil en Flutter
 
-*(Inserta aquí las capturas de la aplicación corriendo en tu emulador o dispositivo)*
-
 ### 5.1. Dashboard Principal
-- *Captura de la pantalla de inicio mostrando:*
-  - Nombre de la aplicación y encabezado visual.
+- *Pegar captura de la pantalla de inicio mostrando:*
+  - Encabezado e identificación visual.
   - Tarjeta 1: Total de productos registrados.
   - Tarjeta 2: Total de unidades disponibles en inventario.
   - Tarjeta 3: Valor económico total del inventario (`suma de precio × cantidad`).
-  - Botones de acceso rápido a la gestión de productos.
+  - Accesos rápidos a la gestión de productos.
 
 ### 5.2. Menú de Navegación (BottomNavigationBar y Drawer)
-- *Captura desplegando el Drawer lateral y la barra inferior implementada con `go_router`.*
+- *Pegar captura desplegando el Drawer lateral y la barra inferior.*
 
 ### 5.3. Listado de Productos y Filtros
-- *Captura mostrando la lista de tarjetas con nombre, precio unitario, unidades disponibles y etiquetas de estado de stock (disponible, bajo stock o agotado).*
-- *Captura aplicando filtro por categoría o búsqueda por texto.*
+- *Pegar captura de la lista con nombre, precio, existencias y badges de stock.*
+- *Pegar captura aplicando filtro por categorías o búsqueda.*
 
 ### 5.4. Consulta de Detalle de Producto
-- *Captura de la pantalla `/productos/detalle/:id` con la información completa: ID, código, nombre, categoría, precio, existencias, cálculo del valor total acumulado y descripción.*
+- *Pegar captura de la pantalla `/productos/detalle/:id` con todos los campos y valor total del stock.*
 
 ### 5.5. Formulario de Registro (POST)
-- *Captura del formulario validado al ingresar un nuevo producto.*
-- *Captura del SnackBar de éxito tras el registro.*
+- *Pegar captura del formulario con validaciones y SnackBar verde de confirmación.*
 
 ### 5.6. Formulario de Edición (PUT)
-- *Captura con los campos precargados y actualización de datos.*
+- *Pegar captura con los datos precargados y actualización.*
 
 ### 5.7. Eliminación con Diálogo de Confirmación (DELETE)
-- *Captura del diálogo modal `ConfirmDeleteDialog` preguntando al usuario si desea eliminar el producto.*
-- *Captura del SnackBar confirmando la eliminación y lista actualizada.*
+- *Pegar captura del modal de confirmación y posterior eliminación en vivo.*
 
 ---
 
 ## 6. Demostración de Persistencia Real de Datos
-- *Captura o explicación evidenciando que al reiniciar la aplicación móvil y el servidor backend, los registros creados y modificados permanecen intactos dentro del archivo `database.sqlite`.*
+- *Explicación o captura demostrando que los datos se almacenan en el archivo `database.sqlite` y permanecen inalterados tras reiniciar la app y el servidor.*
 
 ---
 
-## 7. Despliegue en la Nube (Opcional — 5%)
-*(Completar esta sección si realizaste el despliegue)*
-- **Proveedor en la Nube:** [Render / Railway / Fly.io]
-- **URL Pública del Backend:** `https://tu-api.onrender.com`
-- **Captura del Dashboard del proveedor:** Demostrando el servicio activo en producción.
-- **Captura de la App Flutter conectada a la URL remota:** Evidenciando las operaciones CRUD ejecutadas contra el servidor en la nube.
+## 7. Despliegue en la Nube (Bono 5% — Cumplido 🟢)
+- **Proveedor:** Render.com
+- **URL Pública del Backend:** [https://inventario-api-parcial2.onrender.com](https://inventario-api-parcial2.onrender.com)
+- **Estado del Servicio:** `Live 🟢`
+- *Pegar captura del Dashboard de Render mostrando el Web Service activo.*
+- *Pegar captura de la app Flutter conectada a `https://inventario-api-parcial2.onrender.com/api` realizando operaciones.*
