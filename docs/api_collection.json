@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "c1f72d42-498b-4b19-8640-inventario-parcial2",
+    "name": "Inventario API REST - Parcial 2 Móviles",
+    "description": "Colección de peticiones HTTP para pruebas de la API REST de inventario (compatible con Postman y Thunder Client).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Verificación de Salud",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/",
+          "host": ["{{base_url}}"],
+          "path": [""]
+        }
+      }
+    },
+    {
+      "name": "1. Listar Productos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/productos",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos"]
+        }
+      }
+    },
+    {
+      "name": "2. Consultar Estadísticas Dashboard",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/productos/stats",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos", "stats"]
+        }
+      }
+    },
+    {
+      "name": "3. Consultar Detalle de Producto por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/productos/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos", "1"]
+        }
+      }
+    },
+    {
+      "name": "4. Registrar Nuevo Producto (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Tablet Gráfica Wacom One\",\n  \"codigo\": \"PROD-025\",\n  \"descripcion\": \"Área activa de 6x4 pulgadas con lápiz óptico sensible a 4096 niveles de presión\",\n  \"precio\": 59.99,\n  \"cantidad\": 14,\n  \"categoria\": \"Diseño\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/productos",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos"]
+        }
+      }
+    },
+    {
+      "name": "5. Actualizar Producto Existente (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Tablet Gráfica Wacom One v2\",\n  \"codigo\": \"PROD-025\",\n  \"descripcion\": \"Versión actualizada con conectividad Bluetooth\",\n  \"precio\": 69.99,\n  \"cantidad\": 20,\n  \"categoria\": \"Diseño\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/productos/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos", "1"]
+        }
+      }
+    },
+    {
+      "name": "6. Eliminar Producto (DELETE)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/productos/12",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos", "12"]
+        }
+      }
+    },
+    {
+      "name": "7. Prueba de Validación - Error 422 (Campos vacíos o inválidos)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"\",\n  \"codigo\": \"\",\n  \"precio\": -10,\n  \"cantidad\": -5\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/productos",
+          "host": ["{{base_url}}"],
+          "path": ["api", "productos"]
+        }
+      }
+    }
+  ]
+}
