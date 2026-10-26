@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe de Evidencias — Parcial 2 Programación Móvil</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+    .header {
+      border-bottom: 3px solid #1e3a8a;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+    .header h1 {
+      color: #1e3a8a;
+      margin: 0 0 6px 0;
+      font-size: 24px;
+    }
+    .header h2 {
+      color: #0d9488;
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .section-title {
+      color: #1e3a8a;
+      border-left: 4px solid #1e3a8a;
+      padding-left: 10px;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      font-size: 17px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px 0;
+      font-size: 13px;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 9px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+    .url-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      word-break: break-all;
+    }
+    .img-placeholder {
+      border: 2px dashed #94a3b8;
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 25px;
+      text-align: center;
+      color: #64748b;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .tech-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      background: #fafafa;
+    }
+    .tech-card h4 {
+      margin: 0 0 8px 0;
+      color: #1e3a8a;
+    }
+    .tech-card ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 13px;
+    }
+    pre {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      overflow-x: auto;
+    }
+    .alert-box {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 10px;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>INFORME DE EVIDENCIAS — SEGUNDO PARCIAL</h1>
+    <h2>Sistema de Gestión de Inventario (API REST + Flutter Dio)</h2>
+    <span class="badge">100% Requisitos Base + 5% Despliegue en la Nube</span>
+  </div>
+
+  <h3 class="section-title">1. Identificación del Estudiante</h3>
+  <table>
+    <tr><th width="30%">Nombre del Estudiante</th><td>Samuel Alejandro Rincón Serna</td></tr>
+    <tr><th>Asignatura</th><td>Programación Móvil</td></tr>
+    <tr><th>Semestre</th><td>2026-II</td></tr>
+    <tr><th>Programa Académico</th><td>Ingeniería de Sistemas</td></tr>
+  </table>
+
+  <h3 class="section-title">2. Enlaces Oficiales de Entrega</h3>
+  <div class="url-box">
+    <strong>Repositorio GitHub (Público):</strong><br>
+    <a href="https://github.com/Sarincon508/Parcial-moviles-2" target="_blank">https://github.com/Sarincon508/Parcial-moviles-2</a>
+  </div>
+  <div class="url-box">
+    <strong>Enlace al Video Explicativo:</strong><br>
+    <em>[PEGA AQUÍ EL ENLACE DE TU VIDEO DE YOUTUBE (OCULTO) O GOOGLE DRIVE]</em>
+  </div>
+  <div class="url-box">
+    <strong>API REST Desplegada en Producción (Bono 5%):</strong><br>
+    <a href="https://inventario-api-parcial2.onrender.com" target="_blank">https://inventario-api-parcial2.onrender.com</a>
+  </div>
+
+  <div class="alert-box">
+    <strong>⚠️ Verificación de Permisos:</strong> El repositorio de GitHub es público y el video cuenta con permisos de acceso sin restricciones para el docente.
+  </div>
+
+  <h3 class="section-title">3. Arquitectura y Tecnologías Utilizadas</h3>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h4>Backend & Base de Datos</h4>
+      <ul>
+        <li><strong>Node.js & Express.js:</strong> Servidor RESTful asíncrono.</li>
+        <li><strong>SQLite3:</strong> Base de datos relacional persistente en disco (<code>database.sqlite</code>).</li>
+        <li><strong>CORS & Dotenv:</strong> Habilitación multiplataforma y gestión de entornos.</li>
+        <li><strong>Render Cloud:</strong> Despliegue en la nube con certificado HTTPS automático.</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h4>Frontend Móvil</h4>
+      <ul>
+        <li><strong>Flutter & Dart:</strong> Interfaz moderna con Material 3.</li>
+        <li><strong>Dio:</strong> Cliente HTTP avanzado con interceptores y manejo tipado de errores.</li>
+        <li><strong>go_router:</strong> Enrutamiento declarativo y navegación anidada (ShellRoute).</li>
+        <li><strong>Provider:</strong> Gestión de estado reactiva (ChangeNotifier).</li>
+        <li><strong>flutter_dotenv:</strong> Variables de entorno externas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="section-title">4. Esquema de Base de Datos y Endpoints</h3>
+  <pre>
+CREATE TABLE IF NOT EXISTS productos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  codigo TEXT UNIQUE NOT NULL,
+  descripcion TEXT,
+  precio REAL NOT NULL,
+  cantidad INTEGER NOT NULL,
+  categoria TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+  </pre>
+
+  <table>
+    <thead>
+      <tr><th>Método</th><th>Endpoint</th><th>Funcionalidad</th><th>Código HTTP</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GET</td><td>/api/productos</td><td>Listar todos los productos</td><td>200 OK</td></tr>
+      <tr><td>GET</td><td>/api/productos/stats</td><td>Métricas calculadas del Dashboard</td><td>200 OK</td></tr>
+      <tr><td>GET</td><td>/api/productos/:id</td><td>Consultar detalle por ID</td><td>200 OK / 404</td></tr>
+      <tr><td>POST</td><td>/api/productos</td><td>Registrar nuevo producto (validador único)</td><td>201 Created / 422</td></tr>
+      <tr><td>PUT</td><td>/api/productos/:id</td><td>Actualizar producto existente</td><td>200 OK / 422</td></tr>
+      <tr><td>DELETE</td><td>/api/productos/:id</td><td>Eliminar producto con confirmación</td><td>200 OK / 404</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="section-title">5. Evidencias Gráficas (Capturas de Pantalla)</h3>
+
+  <h4>5.1. Pruebas de la API en Postman (Servidor en la Nube)</h4>
+  <div class="img-placeholder">
+    [Insertar captura de Postman ejecutando GET /api/productos con código 200 y URL https://inventario-api-parcial2.onrender.com]
+  </div>
+  <div class="img-placeholder">
+    [Insertar captura de Postman ejecutando POST /api/productos con código 201 Created o validación 422]
+  </div>
+
+  <h4>5.2. Dashboard Principal de Flutter con Indicadores Reales</h4>
+  <div class="img-placeholder">
+    [Insertar captura del Dashboard en el Emulador mostrando las 3 tarjetas: Total Productos, Unidades y Valor Económico]
+  </div>
+
+  <h4>5.3. Navegación, Listado y Detalle</h4>
+  <div class="img-placeholder">
+    [Insertar captura del Listado de productos con badges de stock (verde/naranja/rojo) y pantalla de Detalle]
+  </div>
+
+  <h4>5.4. Operaciones CRUD (Crear, Editar y Eliminar)</h4>
+  <div class="img-placeholder">
+    [Insertar captura del Formulario de registro y del Diálogo modal de confirmación de eliminación]
+  </div>
+
+  <h3 class="section-title">6. Despliegue en la Nube (Bono Opcional 5% Cumplido)</h3>
+  <table>
+    <tr><th>Proveedor Cloud</th><td>Render.com (Web Service con Node.js & SQLite)</td></tr>
+    <tr><th>URL Pública HTTPS</th><td><a href="https://inventario-api-parcial2.onrender.com">https://inventario-api-parcial2.onrender.com</a></td></tr>
+    <tr><th>Estado del Servicio</th><td>Live 🟢 (Activo, accesible públicamente y consumido por Flutter)</td></tr>
+  </table>
+  <div class="img-placeholder">
+    [Insertar captura del panel de Render mostrando el servicio en estado "Live" con su URL pública]
+  </div>
+
+  <hr style="border: 0; border-top: 1px solid #cbd5e1; margin-top: 30px;">
+  <p style="text-align: center; font-size: 12px; color: #64748b;">
+    Sistema de Gestión de Inventario — Segundo Parcial de Programación Móvil — 2026
+  </p>
+
+</body>
+</html>
