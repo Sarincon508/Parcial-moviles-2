@@ -1,6 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
 const dbPath = process.env.DB_PATH || path.resolve(__dirname, '../../database.sqlite');
 
@@ -24,7 +25,63 @@ const db = new sqlite3.Database(dbPath, (err) => {
 const initDatabase = () => {
   return new Promise((resolve, reject) => {
     db.serialize(() => {
-      // Crear tabla de productos
+      // 1. Crear tabla de usuarios
+      db.run(
+        `CREATE TABLE IF NOT EXISTS usuarios (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          nombre TEXT NOT NULL,
+          email TEXT UNIQUE NOT NULL,
+          password TEXT NOT NULL,
+          rol TEXT DEFAULT 'admin',
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )`,
+        (err) => {
+          if (err) {
+            console.error('❌ Error creando tabla usuarios:', err.message);
+            return reject(err);
+          }
+
+          // Verificar si hay usuarios para sembrar los usuarios por defecto
+          db.get('SELECT COUNT(*) as total FROM usuarios', (err, userRow) => {
+            if (err) {
+              console.error('❌ Error consultando usuarios:', err.message);
+              return reject(err);
+            }
+
+            if (userRow.total === 0) {
+              console.log('🌱 Sembrando usuarios iniciales de prueba...');
+              const salt = bcrypt.genSaltSync(10);
+              const hashAdmin = bcrypt.hashSync('admin123', salt);
+              const hashUser = bcrypt.hashSync('user123', salt);
+
+              const initialUsers = [
+                ['Administrador Sistema', 'admin@inventario.com', hashAdmin, 'admin'],
+                ['Juan Pérez', 'usuario@inventario.com', hashUser, 'operador']
+              ];
+
+              const userStmt = db.prepare(
+                'INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)'
+              );
+
+              for (const u of initialUsers) {
+                userStmt.run(u);
+              }
+
+              userStmt.finalize((err) => {
+                if (err) {
+                  console.error('❌ Error sembrando usuarios iniciales:', err.message);
+                } else {
+                  console.log('✅ Usuarios iniciales sembrados exitosamente (admin@inventario.com / admin123).');
+                }
+              });
+            } else {
+              console.log(`ℹ️ La base de datos ya contiene ${userRow.total} usuarios.`);
+            }
+          });
+        }
+      );
+
+      // 2. Crear tabla de productos
       db.run(
         `CREATE TABLE IF NOT EXISTS productos (
           id INTEGER PRIMARY KEY AUTOINCREMENT,

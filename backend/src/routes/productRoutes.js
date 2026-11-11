@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const {
   getProducts,
@@ -15,7 +16,9 @@ const { validateProduct, validateId } = require('../middlewares/validator');
 
 /**
  * Endpoints del recurso Productos
+ * Todos los endpoints están protegidos mediante el middleware de verificación JWT
  */
+router.use(authMiddleware);
 
 // Rutas auxiliares (declaradas antes de :id para evitar colisiones)
 router.get('/stats', getStats);

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const { notFoundHandler, errorHandler } = require('./middlewares/errorHandler');
 
@@ -19,24 +20,31 @@ app.use(morgan('dev'));
 // Ruta raíz de verificación de salud y documentación básica
 app.get('/', (req, res) => {
   res.status(200).json({
-    nombre: 'API REST - Sistema de Gestión de Inventario',
-    version: '1.0.0',
+    nombre: 'API REST - Sistema de Gestión de Inventario con Autenticación JWT',
+    version: '2.0.0',
     estado: 'En línea 🟢',
-    descripcion: 'API para la gestión de productos con persistencia SQLite para aplicación Flutter',
+    descripcion: 'API con seguridad JWT para la gestión de productos y persistencia SQLite',
     endpoints: {
-      listar_productos: 'GET /api/productos',
-      detalle_producto: 'GET /api/productos/:id',
-      registrar_producto: 'POST /api/productos',
-      actualizar_producto: 'PUT /api/productos/:id',
-      eliminar_producto: 'DELETE /api/productos/:id',
-      estadisticas_dashboard: 'GET /api/productos/stats',
-      categorias_disponibles: 'GET /api/productos/categorias'
+      auth_login: 'POST /api/auth/login',
+      auth_perfil: 'GET /api/auth/perfil [Protegido con Bearer token]',
+      auth_register: 'POST /api/auth/register',
+      listar_productos: 'GET /api/productos [Protegido con Bearer token]',
+      detalle_producto: 'GET /api/productos/:id [Protegido con Bearer token]',
+      registrar_producto: 'POST /api/productos [Protegido con Bearer token]',
+      actualizar_producto: 'PUT /api/productos/:id [Protegido con Bearer token]',
+      eliminar_producto: 'DELETE /api/productos/:id [Protegido con Bearer token]',
+      estadisticas_dashboard: 'GET /api/productos/stats [Protegido con Bearer token]',
+      categorias_disponibles: 'GET /api/productos/categorias [Protegido con Bearer token]'
     },
-    documentacion: 'Consulte el archivo README.md o la colección de Postman/Thunder Client'
+    usuarios_prueba: {
+      admin: { email: 'admin@inventario.com', clave: 'admin123' },
+      operador: { email: 'usuario@inventario.com', clave: 'user123' }
+    }
   });
 });
 
 // Registrar rutas de la API
+app.use('/api/auth', authRoutes);
 app.use('/api/productos', productRoutes);
 
 // Manejo de 404 y Errores
