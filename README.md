@@ -1,4 +1,8 @@
-# 📦 Sistema de Gestión de Inventario — Parcial 2 Móviles
+# 📦 Sistema de Gestión de Inventario — Parcial 2 & Taller JWT (Parcial 3)
+
+> 🔐 **Actualización Taller JWT (Parcial 3):**
+> Todo el desarrollo de la **Autenticación JWT** (Backend Node.js/Express protegido con JWT y Frontend Flutter con Dio, `flutter_secure_storage`, `shared_preferences`, vista de sesión y guards de `GoRouter`) se encuentra estructurado y listo para ejecución dentro de la carpeta:
+> 👉 **[`parcial 3/`](parcial%203/)** (Ver la documentación completa en [**`parcial 3/README.md`**](parcial%203/README.md)).
 
 Solución informática completa para la gestión y control de inventario de productos en un establecimiento comercial, compuesta por una **API REST propia con persistencia en base de datos SQLite** y una **aplicación móvil desarrollada en Flutter** que consume dicha API mediante la librería **Dio**, navegación con **GoRouter** y gestión de estado reactiva con **Provider**.
 
