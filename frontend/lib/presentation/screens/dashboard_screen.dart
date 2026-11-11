@@ -18,6 +18,11 @@ class DashboardScreen extends StatelessWidget {
         title: const Text('Dashboard de Inventario'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.account_circle_rounded),
+            tooltip: 'Información de Sesión',
+            onPressed: () => context.push('/sesion'),
+          ),
+          IconButton(
             icon: const Icon(Icons.refresh_rounded),
             tooltip: 'Actualizar métricas',
             onPressed: () => provider.loadInitialData(),

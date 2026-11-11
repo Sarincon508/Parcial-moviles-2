@@ -4,7 +4,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 backend/node_modules/
+parcial 3/backend/node_modules/
 backend/database.sqlite-journal
+parcial 3/backend/database.sqlite-journal
 
 # Flutter & Dart
 .dart_tool/
@@ -17,8 +19,14 @@ frontend/.packages
 frontend/.pub-cache/
 frontend/.pub/
 frontend/build/
+parcial 3/frontend/.dart_tool/
+parcial 3/frontend/.packages
+parcial 3/frontend/.pub-cache/
+parcial 3/frontend/.pub/
+parcial 3/frontend/build/
 frontend/.metadata
 frontend/windows/flutter/ephemeral/
+parcial 3/frontend/windows/flutter/ephemeral/
 frontend/linux/
 frontend/macos/
 frontend/ios/

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import '../config/env.dart';
+import 'storage_service.dart';
 
 /// Excepción personalizada para errores de la API REST
 class ApiException implements Exception {
@@ -18,10 +19,14 @@ class ApiException implements Exception {
   String toString() => message;
 }
 
-/// Cliente HTTP centralizado basado en Dio
+/// Cliente HTTP centralizado basado en Dio con interceptores para JWT y manejo de 401
 class ApiService {
   static ApiService? _instance;
   late Dio _dio;
+  final StorageService _storageService = StorageService();
+
+  /// Callback invocado cuando la API devuelve un código 401 (token expirado o faltante)
+  VoidCallback? onUnauthorized;
 
   ApiService._internal() {
     _initDio();
@@ -49,10 +54,19 @@ class ApiService {
       ),
     );
 
-    // Interceptor para depuración y logs de peticiones
+    // Interceptor para inyectar token JWT, logs y manejo de 401
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
+          // Inyectar el token JWT almacenado si no ha sido provisto manualmente
+          if (!options.headers.containsKey('Authorization')) {
+            final token = await _storageService.getToken();
+            if (token != null && token.isNotEmpty) {
+              options.headers['Authorization'] = 'Bearer $token';
+              debugPrint('🔑 [DIO] Token JWT inyectado en cabecera Authorization');
+            }
+          }
+
           debugPrint('🌐 [DIO REQ] ${options.method} -> ${options.uri}');
           return handler.next(options);
         },
@@ -63,6 +77,16 @@ class ApiService {
         onError: (DioException error, handler) {
           debugPrint('❌ [DIO ERR ${error.response?.statusCode}] <- ${error.requestOptions.uri}');
           debugPrint('   Mensaje: ${error.message}');
+
+          // Si el servidor responde 401 y no es la petición de login, notificar expiración de sesión
+          final isLoginEndpoint = error.requestOptions.path.contains('/auth/login');
+          if (error.response?.statusCode == 401 && !isLoginEndpoint) {
+            debugPrint('🔒 [DIO 401] Petición no autorizada o sesión expirada. Ejecutando callback de desautenticación.');
+            if (onUnauthorized != null) {
+              onUnauthorized!();
+            }
+          }
+
           return handler.next(error);
         },
       ),
@@ -107,7 +131,14 @@ class ApiService {
             statusCode: statusCode,
           );
         case DioExceptionType.badResponse:
-          if (statusCode == 404) {
+          if (statusCode == 401) {
+            return ApiException(
+              message: 'Acceso no autorizado: Inicie sesión para continuar o sus credenciales son inválidas (401).',
+              statusCode: 401,
+            );
+          } else if (statusCode == 403) {
+            return ApiException(message: 'Acceso denegado (403): Permisos insuficientes.', statusCode: 403);
+          } else if (statusCode == 404) {
             return ApiException(message: 'El recurso solicitado no fue encontrado (404).', statusCode: 404);
           } else if (statusCode == 422) {
             return ApiException(message: 'Error de validación en los datos enviados (422).', statusCode: 422);
