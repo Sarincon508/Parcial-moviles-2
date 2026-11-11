@@ -38,14 +38,22 @@ echo ================================================================
 echo   Herramientas iniciadas en tu pantalla:
 echo   - VS Code (Codigo Backend y Frontend)
 echo   - DB Browser for SQLite (Tabla usuarios y productos)
-echo   - Postman (Importa la coleccion de parcial 3/postman)
+echo   - Postman (Para pruebas con la URL de Render o Local)
 echo   - Emulador Android Pixel 7 (iniciando...)
 echo   - Servidor Backend Node.js en http://localhost:3000
 echo ================================================================
 echo.
-echo IMPORTANTE: Espera a que el Emulador de Android cargue su pantalla principal.
-echo Cuando el emulador este encendido, presiona cualquier tecla para lanzar Flutter...
+echo [PASO OBLIGATORIO ANTES DE CONTINUAR]:
+echo 1. Mira tu pantalla y verifica que el Emulador Pixel 7 haya terminado de encender.
+echo 2. Cuando veas la pantalla de inicio de Android (los iconos del celular),
+echo    presiona cualquier tecla en esta ventana para abrir la app Flutter...
+echo.
 pause > nul
 
 cd /d "%BASE_DIR%frontend"
-flutter run
+echo Lanzando aplicacion en el Emulador Android...
+flutter run -d android
+if errorlevel 1 (
+    echo No se detecto el emulador automaticamente, seleccionando dispositivo...
+    flutter run
+)
