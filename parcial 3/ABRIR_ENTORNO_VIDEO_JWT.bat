@@ -25,19 +25,26 @@ if exist "%LOCALAPPDATA%\Postman\Postman.exe" (
     start "" postman
 )
 
-echo 4. Iniciando el Backend en una ventana dedicada...
+echo 4. Iniciando el Emulador Android Pixel 7...
+if exist "F:\Android\Sdk\emulator\emulator.exe" (
+    start "" "F:\Android\Sdk\emulator\emulator.exe" -avd Pixel_7_API_34
+)
+
+echo 5. Iniciando el Backend JWT en una ventana dedicada...
 start "Backend JWT API REST (Puerto 3000)" cmd /k "cd /d ""%BASE_DIR%backend"" && npm run dev"
 
 echo.
 echo ================================================================
-echo   Herramientas iniciadas exitosamente:
+echo   Herramientas iniciadas en tu pantalla:
 echo   - VS Code (Codigo Backend y Frontend)
 echo   - DB Browser for SQLite (Tabla usuarios y productos)
-echo   - Postman (Coleccion Taller JWT lista)
-echo   - Ventana del Servidor Backend en ejecucion
+echo   - Postman (Importa la coleccion de parcial 3/postman)
+echo   - Emulador Android Pixel 7 (iniciando...)
+echo   - Servidor Backend Node.js en http://localhost:3000
 echo ================================================================
 echo.
-echo Presiona cualquier tecla para ejecutar la app Flutter...
+echo IMPORTANTE: Espera a que el Emulador de Android cargue su pantalla principal.
+echo Cuando el emulador este encendido, presiona cualquier tecla para lanzar Flutter...
 pause > nul
 
 cd /d "%BASE_DIR%frontend"
